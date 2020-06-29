@@ -1,0 +1,37 @@
+  .Nav_list {
+    list-style-type: none;
+    margin: 130px 0 0;
+    padding: 0;
+  }
+  .add-button {
+    margin: 20px auto;
+  }
+  .add-button:hover {
+    background-color: #29862e;
+    color: white;
+  }
+  
+  .Nav-list-item {
+    background-color: white;
+    color: black;
+    display: block;
+    font-size: 20px;
+    margin: 0 0 8px auto;
+    max-width: 180px;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  .Nav-list-item:hover {
+    color: #FFB72F;
+    cursor: pointer;
+  }
+  .Nav-list-item.active {
+    background-color: lightgrey;
+  }
+  
+  .num-notes {
+    color: darkblue;
+    display: block;
+    float: right;
+    font-size: 10px;
+  }
