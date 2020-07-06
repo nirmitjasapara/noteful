@@ -5,9 +5,17 @@
   }
   .add-button {
     margin: 20px auto;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    border: black solid 2px;
+    border-radius: 5px;
   }
   .add-button:hover {
-    background-color: #29862e;
+    border-color: #29862e;
+    background-color: darkgrey;
     color: white;
   }
   
@@ -17,7 +25,6 @@
     display: block;
     font-size: 20px;
     margin: 0 0 8px auto;
-    max-width: 180px;
     padding: 8px 16px;
     text-decoration: none;
   }

@@ -1,0 +1,22 @@
+.error {
+    color: red;
+    margin-left: 20px;
+}
+.registration_button {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    background-color: green;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.registration {
+    padding: 10px;
+}
+.form-group {
+    border: black solid 2px;
+    border-radius: 10px;
+    padding: 5px;
+}

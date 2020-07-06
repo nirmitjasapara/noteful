@@ -29,7 +29,7 @@ export default class NoteListNav extends React.Component {
         <Link
           to='/add-folder'
           type='button'
-          className='add_button'
+          className='add-button'
         >Add Folder</Link>
       </div>
     )

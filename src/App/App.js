@@ -5,6 +5,8 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import './App.css'
+import AddFolder from '../AddFolder/AddFolder';
 
 class App extends Component {
   state = {
@@ -66,6 +68,7 @@ class App extends Component {
                 />
             ))}
             <Route path="/note/:noteId" component={NotePageMain} />
+            <Route path="/add-folder" component={AddFolder} />
         </>
     );
   }
@@ -78,12 +81,12 @@ class App extends Component {
     return (
         <ApiContext.Provider value={value}>
             <div className="App">
-                <nav className="App_nav">{this.renderNavRoutes()}</nav>
                 <header className="App_header">
                     <h1>
                       <Link to="/">Noteful</Link>
                     </h1>
                 </header>
+                <nav className="App_nav">{this.renderNavRoutes()}</nav>
                 <main className="App_main">{this.renderMainRoutes()}</main>
             </div>
         </ApiContext.Provider>
