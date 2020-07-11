@@ -2,10 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ApiContext from '../ApiContext'
 import './Note.css'
+import PropTypes from 'prop-types';
 
 export default class Note extends React.Component {
   static defaultProps ={
     onDeleteNote: () => {},
+  }
+  static propTypes ={
+    name: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    onDeleteNote:PropTypes.func
   }
   static contextType = ApiContext;
   handleClickDelete = e => {

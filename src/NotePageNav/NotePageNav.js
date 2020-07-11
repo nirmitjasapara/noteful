@@ -11,11 +11,6 @@ export default function NotePageNav(props) {
         onClick={() => props.history.goBack()}
         className='back-button'
       >Go Back</Link>
-      {props.folder && (
-        <h3 className='folder-name'>
-          {props.folder.name}
-        </h3>
-      )}
     </div>
   )
 }
