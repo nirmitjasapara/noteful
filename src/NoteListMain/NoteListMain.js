@@ -30,13 +30,11 @@ export default class NoteListMain extends React.Component {
             </li>
           )}
         </ul>
-        <div className='button-container'>
-          <Link
-            to='/add-note'
-            type='button'
-            className='add-note-button'
-          >Add Note</Link>
-        </div>
+        <Link
+          to='/add-note'
+          type='button'
+          className='add-note-button'
+        >Add Note</Link>
       </section>
     )
   }

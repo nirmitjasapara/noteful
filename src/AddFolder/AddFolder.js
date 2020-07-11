@@ -1,8 +1,10 @@
 import React from 'react'
 import './AddFolder.css'
-import ValidationError from '../ValidationError';
+import ValidationError from '../ValidationError'
+import ApiContext from '../ApiContext'
 
 export default class AddFolder extends React.Component {
+    static contextType = ApiContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -21,15 +23,25 @@ export default class AddFolder extends React.Component {
         event.preventDefault();
         const { folderName } = this.state;
         let API_ENDPOINT = 'http://localhost:9090';
+        let JSONbody = JSON.stringify({
+            name: folderName.value
+        });
 
         fetch(`${API_ENDPOINT}/folders`, {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
           },
-          body: {
-              name: folderName.value
-          }
+          body: JSONbody,
+          })
+          .then(res => {
+            if (!res.ok)
+              return res.json().then(e => Promise.reject(e))
+            return res.json()
+          })
+          .then(resjson => {
+            this.context.addFolder(resjson);
+            this.props.history.goBack();
           })
           .catch(error => {
             console.error({ error })

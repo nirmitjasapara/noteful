@@ -1,0 +1,19 @@
+.NoteListMain ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+}
+.add-note-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    background-color: green;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.add-note-button:hover {
+    background-color: darkgreen;
+}

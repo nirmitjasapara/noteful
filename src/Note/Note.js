@@ -38,18 +38,18 @@ export default class Note extends React.Component {
     const { name, id, modified } = this.props
     return (
       <div className='Note'>
-        <h2 className='Note_title'>
+        <h2 className='title'>
           <Link to={`/note/${id}`}>
             {name}
           </Link>
         </h2>
         <button
-          className='Note_delete'
+          className='delete'
           type='button'
           onClick={this.handleClickDelete}
         >remove</button>
-        <div className='Note_dates'>
-          <div className='Note_dates-modified'>
+        <div className='dates'>
+          <div className='dates-modified'>
             Modified
             {' '}
             <span className='Date'>
