@@ -2,6 +2,7 @@ import React from 'react'
 import './AddNote.css'
 import ValidationError from '../ValidationError';
 import ApiContext from '../ApiContext'
+import config from '../config'
 
 export default class AddNote extends React.Component {
     static contextType = ApiContext;
@@ -37,7 +38,6 @@ export default class AddNote extends React.Component {
         event.preventDefault();
         const { noteName, noteContent, folderId } = this.state;
         let modifiedDate = new Date().toISOString();
-        let API_ENDPOINT = 'http://localhost:9090';
         let JSONbody = JSON.stringify({
             name: noteName.value,
             content: noteContent.value,
@@ -45,7 +45,7 @@ export default class AddNote extends React.Component {
             folderId: folderId.value
         });
 
-        fetch(`${API_ENDPOINT}/notes`, {
+        fetch(`${config.API_ENDPOINT}/notes`, {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

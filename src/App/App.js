@@ -8,6 +8,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import './App.css'
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
+import config from '../config'
 
 class App extends Component {
   state = {
@@ -15,10 +16,9 @@ class App extends Component {
     folders: []
   };
   componentDidMount() {
-    let API_ENDPOINT = 'http://localhost:9090';
     Promise.all([
-        fetch(`${API_ENDPOINT}/notes`),
-        fetch(`${API_ENDPOINT}/folders`)
+        fetch(`${config.API_ENDPOINT}/notes`),
+        fetch(`${config.API_ENDPOINT}/folders`)
     ])
         .then(([notesRes, foldersRes]) => {
             if (!notesRes.ok)

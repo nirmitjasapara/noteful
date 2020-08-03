@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import ApiContext from '../ApiContext'
 import './Note.css'
 import PropTypes from 'prop-types';
+import config from '../config'
 
 export default class Note extends React.Component {
   static defaultProps ={
@@ -18,9 +19,8 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-    let API_ENDPOINT = 'http://localhost:9090';
 
-    fetch(`${API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
