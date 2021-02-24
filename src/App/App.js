@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
-import ApiContext from '../ApiContext';
-import NoteListNav from '../NoteListNav/NoteListNav';
-import NotePageNav from '../NotePageNav/NotePageNav';
-import NoteListMain from '../NoteListMain/NoteListMain';
-import NotePageMain from '../NotePageMain/NotePageMain';
-import './App.css'
-import AddFolder from '../AddFolder/AddFolder';
-import AddNote from '../AddNote/AddNote';
-import config from '../config'
+import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
+import ApiContext from "../ApiContext";
+import NoteListNav from "../NoteListNav/NoteListNav";
+import NotePageNav from "../NotePageNav/NotePageNav";
+import NoteListMain from "../NoteListMain/NoteListMain";
+import NotePageMain from "../NotePageMain/NotePageMain";
+import "./App.css";
+import AddFolder from "../AddFolder/AddFolder";
+import AddNote from "../AddNote/AddNote";
+import config from "../config";
 
 class App extends Component {
   state = {
@@ -17,100 +17,90 @@ class App extends Component {
   };
   componentDidMount() {
     let header = {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': `Bearer ${config.API_KEY}`
-        }
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${config.API_KEY}`
+      }
     };
     Promise.all([
-        fetch(`${config.API_ENDPOINT}/notes`, header),
-        fetch(`${config.API_ENDPOINT}/folders`, header)
+      fetch(`${config.API_ENDPOINT}/notes`, header),
+      fetch(`${config.API_ENDPOINT}/folders`, header)
     ])
-        .then(([notesRes, foldersRes]) => {
-            if (!notesRes.ok)
-                return notesRes.json().then(e => Promise.reject(e));
-            if (!foldersRes.ok)
-                return foldersRes.json().then(e => Promise.reject(e));
+      .then(([notesRes, foldersRes]) => {
+        if (!notesRes.ok) return notesRes.json().then(e => Promise.reject(e));
+        if (!foldersRes.ok)
+          return foldersRes.json().then(e => Promise.reject(e));
 
-            return Promise.all([notesRes.json(), foldersRes.json()]);
-        })
-        .then(([notes, folders]) => {
-            this.setState({notes, folders});
-        })
-        .catch(error => {
-            console.error({error});
-        });
+        return Promise.all([notesRes.json(), foldersRes.json()]);
+      })
+      .then(([notes, folders]) => {
+        this.setState({ notes, folders });
+      })
+      .catch(error => {
+        console.error({ error });
+      });
   }
   handleDeleteNote = noteId => {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
     });
+    console.log(this.state.notes);
   };
   handleAddNote = note => {
     this.setState({
-      notes: [...this.state.notes,note]
+      notes: [...this.state.notes, note]
     });
   };
   handleAddFolder = folder => {
     this.setState({
-      folders: [...this.state.folders,folder]
+      folders: [...this.state.folders, folder]
     });
   };
   renderNavRoutes() {
     return (
-        <>
-            {['/', '/folder/:folderId'].map(path => (
-                <Route
-                    exact
-                    key={path}
-                    path={path}
-                    component={NoteListNav}
-                />
-            ))}
-            <Route path="/note/:noteId" component={NotePageNav} />
-            <Route path="/add-folder" component={NotePageNav} />
-            <Route path="/add-note" component={NotePageNav} />
-        </>
+      <>
+        {["/", "/folder/:folderId"].map(path => (
+          <Route exact key={path} path={path} component={NoteListNav} />
+        ))}
+        <Route path="/note/:noteId" component={NotePageNav} />
+        <Route path="/add-folder" component={NotePageNav} />
+        <Route path="/add-note" component={NotePageNav} />
+      </>
     );
   }
   renderMainRoutes() {
     return (
-        <>
-            {['/', '/folder/:folderId'].map(path => (
-                <Route
-                    exact
-                    key={path}
-                    path={path}
-                    component={NoteListMain}
-                />
-            ))}
-            <Route path="/note/:noteId" component={NotePageMain} />
-            <Route path="/add-folder" component={AddFolder} />
-            <Route path="/add-note" component={AddNote} />
-        </>
+      <>
+        {["/", "/folder/:folderId"].map(path => (
+          <Route exact key={path} path={path} component={NoteListMain} />
+        ))}
+        <Route path="/note/:noteId" component={NotePageMain} />
+        <Route path="/add-folder" component={AddFolder} />
+        <Route path="/add-note" component={AddNote} />
+      </>
     );
   }
   render() {
     const value = {
-        notes: this.state.notes,
-        folders: this.state.folders,
-        deleteNote: this.handleDeleteNote,
-        addFolder: this.handleAddFolder,
-        addNote: this.handleAddNote
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote
     };
     return (
-        <ApiContext.Provider value={value}>
-            <div className="App">
-                <header className="App_header">
-                    <h1>
-                      <Link to="/">Noteful</Link>
-                    </h1>
-                </header>
-                <nav className="App_nav">{this.renderNavRoutes()}</nav>
-                <main className="App_main">{this.renderMainRoutes()}</main>
-            </div>
-        </ApiContext.Provider>
+      <ApiContext.Provider value={value}>
+        <div className="App">
+          <header className="App_header">
+            <h1>
+              <Link to="/">Noteful</Link>
+            </h1>
+          </header>
+          <nav className="App_nav">{this.renderNavRoutes()}</nav>
+          <main className="App_main">{this.renderMainRoutes()}</main>
+        </div>
+      </ApiContext.Provider>
     );
   }
 }
